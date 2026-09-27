@@ -291,9 +291,10 @@ class ElevateZenApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return DynamicColorBuilder(
       builder: (lightDynamic, darkDynamic) {
-        final lightScheme = lightDynamic ?? _fallbackLightScheme();
-        final darkScheme = darkDynamic ?? _fallbackDarkScheme();
-
+        final ColorScheme lightScheme =
+            lightDynamic ?? _fallbackLightScheme();
+        final ColorScheme darkScheme =
+            darkDynamic ?? _fallbackDarkScheme();
         return MaterialApp(
           title: 'Elevate Zen',
           debugShowCheckedModeBanner: false,
