@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'app.dart';
+
 import '../auth/login.dart';
+
+// Patient
 import '../patient/home.dart';
 import '../patient/case.dart';
 import '../patient/chat.dart';
@@ -7,14 +11,18 @@ import '../patient/records.dart';
 import '../patient/previous_records.dart';
 import '../patient/profile.dart';
 import '../patient/mental_health.dart';
+import '../patient/doctor_chat.dart';
+import '../patient/document_upload.dart';
+import '../patient/abha.dart';
+
+// Doctor
 import '../doctor/home.dart';
 import '../doctor/patients.dart';
 import '../doctor/profile.dart';
 import '../doctor/chat.dart';
 import '../doctor/patient.dart';
-import '../patient/doctor_chat.dart';
-import '../patient/document_upload.dart';
-import '../patient/abha.dart';
+
+// Veterinary
 import '../veterinary/home.dart';
 import '../veterinary/chat.dart';
 import '../veterinary/records.dart';
@@ -22,6 +30,7 @@ import '../veterinary/records.dart';
 class ElevateZenRouter {
   static const String login = '/';
 
+  // Patient
   static const String patientHome = '/patient';
   static const String patientCase = '/patient/case';
   static const String patientChat = '/patient/chat';
@@ -33,113 +42,149 @@ class ElevateZenRouter {
   static const String patientDocuments = '/patient/documents';
   static const String patientAbha = '/patient/abha';
 
+  // Doctor
   static const String doctorHome = '/doctor';
   static const String doctorPatients = '/doctor/patients';
   static const String doctorChat = '/doctor/chat';
   static const String doctorProfile = '/doctor/profile';
   static const String doctorPatient = '/doctor/patient';
 
+  // Veterinary - temporarily kept
   static const String veterinaryHome = '/veterinary';
   static const String veterinaryRecords = '/veterinary/records';
   static const String veterinaryIntake = '/veterinary/intake';
 
-  static Route<dynamic> onGenerateRoute(RouteSettings settings) {
+  static Route<dynamic> onGenerateRoute(
+    RouteSettings settings, {
+    required AppType appType,
+  }) {
     switch (settings.name) {
+      // ─────────────────────────────
+      // LOGIN
+      // ─────────────────────────────
+
       case login:
         return MaterialPageRoute(
           builder: (_) => const LoginScreen(),
           settings: settings,
         );
 
+      // ─────────────────────────────
+      // PATIENT APP
+      // ─────────────────────────────
+
       case patientHome:
-        return MaterialPageRoute(
-          builder: (_) => const PatientHomeScreen(),
-          settings: settings,
+        return _patientRoute(
+          appType,
+          const PatientHomeScreen(),
+          settings,
         );
 
       case patientCase:
-        return MaterialPageRoute(
-          builder: (_) => const PatientCaseScreen(),
-          settings: settings,
+        return _patientRoute(
+          appType,
+          const PatientCaseScreen(),
+          settings,
         );
 
       case patientChat:
-        return MaterialPageRoute(
-          builder: (_) => const PatientChatScreen(),
-          settings: settings,
+        return _patientRoute(
+          appType,
+          const PatientChatScreen(),
+          settings,
         );
 
       case patientRecords:
-        return MaterialPageRoute(
-          builder: (_) => const PatientRecordsScreen(),
-          settings: settings,
+        return _patientRoute(
+          appType,
+          const PatientRecordsScreen(),
+          settings,
         );
 
       case previousRecords:
-        return MaterialPageRoute(
-          builder: (_) => const PreviousRecordsScreen(),
-          settings: settings,
+        return _patientRoute(
+          appType,
+          const PreviousRecordsScreen(),
+          settings,
         );
 
       case patientProfile:
-        return MaterialPageRoute(
-          builder: (_) => const PatientProfileScreen(),
-          settings: settings,
+        return _patientRoute(
+          appType,
+          const PatientProfileScreen(),
+          settings,
         );
-      
+
       case patientMentalWellness:
-        return MaterialPageRoute(
-          builder: (_) => const MentalWellnessScreen(),
-          settings: settings,
+        return _patientRoute(
+          appType,
+          const MentalWellnessScreen(),
+          settings,
         );
 
       case patientDoctorChat:
-        return MaterialPageRoute(
-          builder: (_) => const PatientDoctorChatScreen(),
-          settings: settings,
+        return _patientRoute(
+          appType,
+          const PatientDoctorChatScreen(),
+          settings,
         );
 
       case patientDocuments:
-        return MaterialPageRoute(
-          builder: (_) => const DocumentUploadScreen(),
-          settings: settings,
+        return _patientRoute(
+          appType,
+          const DocumentUploadScreen(),
+          settings,
         );
 
       case patientAbha:
-        return MaterialPageRoute(
-          builder: (_) => const AbhaScreen(),
-          settings: settings,
+        return _patientRoute(
+          appType,
+          const AbhaScreen(),
+          settings,
         );
 
+      // ─────────────────────────────
+      // DOCTOR APP
+      // ─────────────────────────────
+
       case doctorHome:
-        return MaterialPageRoute(
-          builder: (_) => const DoctorHomeScreen(),
-          settings: settings,
+        return _doctorRoute(
+          appType,
+          const DoctorHomeScreen(),
+          settings,
         );
 
       case doctorPatients:
-        return MaterialPageRoute(
-          builder: (_) => const DoctorPatientsScreen(),
-          settings: settings,
+        return _doctorRoute(
+          appType,
+          const DoctorPatientsScreen(),
+          settings,
         );
-      
+
       case doctorPatient:
-        return MaterialPageRoute(
-          builder: (_) => const DoctorPatientScreen(),
-          settings: settings,
+        return _doctorRoute(
+          appType,
+          const DoctorPatientScreen(),
+          settings,
         );
 
       case doctorChat:
-        return MaterialPageRoute(
-          builder: (_) => const DoctorChatScreen(),
-          settings: settings,
+        return _doctorRoute(
+          appType,
+          const DoctorChatScreen(),
+          settings,
         );
 
       case doctorProfile:
-        return MaterialPageRoute(
-          builder: (_) => const DoctorProfileScreen(),
-          settings: settings,
+        return _doctorRoute(
+          appType,
+          const DoctorProfileScreen(),
+          settings,
         );
+
+      // ─────────────────────────────
+      // VETERINARY
+      // ─────────────────────────────
 
       case veterinaryHome:
         return MaterialPageRoute(
@@ -159,6 +204,10 @@ class ElevateZenRouter {
           settings: settings,
         );
 
+      // ─────────────────────────────
+      // UNKNOWN ROUTE
+      // ─────────────────────────────
+
       default:
         return MaterialPageRoute(
           builder: (_) => const _PlaceholderScreen(
@@ -167,6 +216,47 @@ class ElevateZenRouter {
           settings: settings,
         );
     }
+  }
+
+  // Patient routes are available only in Patient app.
+  static Route<dynamic> _patientRoute(
+    AppType appType,
+    Widget page,
+    RouteSettings settings,
+  ) {
+    if (appType != AppType.patient) {
+      return _notAvailable(settings);
+    }
+
+    return MaterialPageRoute(
+      builder: (_) => page,
+      settings: settings,
+    );
+  }
+
+  // Doctor routes are available only in Doctor app.
+  static Route<dynamic> _doctorRoute(
+    AppType appType,
+    Widget page,
+    RouteSettings settings,
+  ) {
+    if (appType != AppType.doctor) {
+      return _notAvailable(settings);
+    }
+
+    return MaterialPageRoute(
+      builder: (_) => page,
+      settings: settings,
+    );
+  }
+
+  static Route<dynamic> _notAvailable(RouteSettings settings) {
+    return MaterialPageRoute(
+      builder: (_) => const _PlaceholderScreen(
+        title: 'Page Not Available',
+      ),
+      settings: settings,
+    );
   }
 }
 

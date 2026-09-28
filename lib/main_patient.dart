@@ -2,5 +2,9 @@ import 'package:flutter/material.dart';
 import 'app/app.dart';
 
 void main() {
-  runApp(const ElevateZenApp());
+  runApp(
+    const ElevateZenApp(
+      appType: AppType.patient,
+    ),
+  );
 }
