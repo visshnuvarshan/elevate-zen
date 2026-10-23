@@ -2,8 +2,15 @@ import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/material.dart';
 import 'router.dart';
 
+enum AppType {
+  patient,
+  doctor,
+}
+
 class ElevateZenApp extends StatelessWidget {
-  const ElevateZenApp({super.key});
+  final AppType appType;
+
+  const ElevateZenApp({super.key, required this.appType});
 
   ThemeData _buildTheme(ColorScheme colorScheme) {
     return ThemeData(
@@ -291,17 +298,27 @@ class ElevateZenApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return DynamicColorBuilder(
       builder: (lightDynamic, darkDynamic) {
-        final lightScheme = lightDynamic ?? _fallbackLightScheme();
-        final darkScheme = darkDynamic ?? _fallbackDarkScheme();
-
+        final ColorScheme lightScheme =
+            lightDynamic ?? _fallbackLightScheme();
+        final ColorScheme darkScheme =
+            darkDynamic ?? _fallbackDarkScheme();
         return MaterialApp(
-          title: 'Elevate Zen',
+          title: appType == AppType.patient
+              ? 'Elevate Zen Patient'
+              : 'Elevate Zen Doctor',
           debugShowCheckedModeBanner: false,
           theme: _buildTheme(lightScheme),
           darkTheme: _buildTheme(darkScheme),
           themeMode: ThemeMode.system,
-          initialRoute: ElevateZenRouter.login,
-          onGenerateRoute: ElevateZenRouter.onGenerateRoute,
+          initialRoute: appType == AppType.patient
+              ? ElevateZenRouter.patientHome
+              : ElevateZenRouter.doctorHome,
+          onGenerateRoute: (settings) {
+            return ElevateZenRouter.onGenerateRoute(
+              settings,
+              appType: appType,
+            );
+          },
         );
       },
     );

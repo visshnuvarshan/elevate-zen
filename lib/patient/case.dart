@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../app/widgets/patient_navigation_bar.dart';
+import '../core/widgets/patient_bar.dart';
 
 enum _InputMethod {
   speech,

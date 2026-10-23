@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../app/widgets/patient_navigation_bar.dart';
-import 'widgets/mental_wellness_section.dart';
+import '../core/widgets/patient_bar.dart';
+import 'widgets/wellness_card.dart';
 
 class PatientHomeScreen extends StatelessWidget {
   const PatientHomeScreen({super.key});

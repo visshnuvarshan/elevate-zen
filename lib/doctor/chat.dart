@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../app/widgets/doctor_navigation_bar.dart';
+import '../core/widgets/doctor_bar.dart';
 
 class DoctorChatScreen extends StatefulWidget {
   const DoctorChatScreen({super.key});

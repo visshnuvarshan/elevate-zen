@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import '../app/widgets/patient_navigation_bar.dart';
+import '../core/widgets/patient_bar.dart';
 
 class PatientChatScreen extends StatefulWidget {
   const PatientChatScreen({super.key});

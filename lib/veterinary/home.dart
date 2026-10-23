@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../app/widgets/veterinary_navigation_bar.dart';
+import '../core/widgets/veterinary_bar.dart';
 
 class VeterinaryHomeScreen extends StatefulWidget {
   const VeterinaryHomeScreen({super.key});
